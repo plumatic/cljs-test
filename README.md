@@ -13,10 +13,7 @@ Simple testing library for ClojureScript, mirroring `clojure.test` as much as po
 (deftest simple-case
   (is= 1 (+ 0 1))
   (is true)
-  (is nil)
-  (are [x y] (= x y)
-   2 (+ 1 1)
-   4 (+ 2 2)))  
+  (is nil))
 ```
 
 
