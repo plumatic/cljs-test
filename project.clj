@@ -1,4 +1,4 @@
-(defproject prismatic/cljs-test "0.0.1"
+(defproject prismatic/cljs-test "0.0.2-SNAPSHOT"
   :description "Very simple cljs testing using PhantomJS or Google Closure Test Runners in the browser"
   :url "https://github.com/prismatic/cljs-test"
   :license {:name "Eclipse Public License"
