@@ -116,12 +116,12 @@
     (log :notice name)
     ((:fn test)))
   (html-report)
-  (when js/phantom
+  (when js/window.phantom
     (let [failed-tests (failed-tests @tests)]
       (js/console.log (count failed-tests) "tests failed")
-      (.exit js/phantom (if (empty? failed-tests) 0 1)))))
+      (.exit js/window.phantom (if (empty? failed-tests) 0 1)))))
 
-(if js/phantom
+(if js/window.phantom
   (.setTimeout js/window run-tests! 4000)
   (set! (.-onreadystatechange js/document)
         (fn []
