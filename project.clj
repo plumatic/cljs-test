@@ -1,4 +1,4 @@
-(defproject prismatic/cljs-test "0.0.4-SNAPSHOT"
+(defproject prismatic/cljs-test "0.0.4"
   :description "Very simple cljs testing"
   :url "https://github.com/prismatic/cljs-test"
   :license {:name "Eclipse Public License"
