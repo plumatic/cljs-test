@@ -1,6 +1,6 @@
 (ns cljs-test.core
   (:use-macros
-   [cljs-test.macros :only [safe-eval]]))
+   [cljs-test.macros :only [is]]))
 
 (def tests (atom {}))
 (def +current-test+ (atom nil))
@@ -114,7 +114,7 @@
     (.setAttribute bookmark "name" name)
     (.appendChild js/document.body bookmark)
     (log :notice name)
-    ((:fn test)))
+    (is (do ((:fn test)) true)))
   (html-report)
   (when js/window.phantom
     (let [failed-tests (failed-tests @tests)]
