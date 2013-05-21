@@ -17,4 +17,4 @@
                       :optimizations :whitespace
                       :pretty-print true}}}
    :test-commands {"unit" ["phantomjs" "target/unit-test.js"]}}
-  :plugins [[lein-cljsbuild "0.3.0"]])
+  :plugins [[lein-cljsbuild "0.3.2"]])
