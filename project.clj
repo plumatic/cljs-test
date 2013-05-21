@@ -1,4 +1,4 @@
-(defproject prismatic/cljs-test "0.0.5"
+(defproject prismatic/cljs-test "0.0.6-SNAPSHOT"
   :description "Very simple cljs testing"
   :url "https://github.com/prismatic/cljs-test"
   :license {:name "Eclipse Public License"
@@ -10,11 +10,11 @@
                               [:url "http://getprismatic.com"]
                               [:email "admin+oss@getprismatic.com"]
                               [:timezone "-8"]]]
-  :cljsbuild 
-    {:builds 
-     {:test {:source-paths ["src" "test"]
-             :compiler {:output-to "target/unit-test.js"
-                        :optimizations :whitespace
-                        :pretty-print true}}}
-     :test-commands {"unit" ["phantomjs" "target/unit-test.js"]}}
+  :cljsbuild
+  {:builds
+   {:test {:source-paths ["src" "test"]
+           :compiler {:output-to "target/unit-test.js"
+                      :optimizations :whitespace
+                      :pretty-print true}}}
+   :test-commands {"unit" ["phantomjs" "target/unit-test.js"]}}
   :plugins [[lein-cljsbuild "0.3.0"]])
