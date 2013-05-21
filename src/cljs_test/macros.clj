@@ -24,8 +24,8 @@
   (let [ex-sym (gensym "exception")]
     `(try
        [:no-error ~expr]
-       (catch ~ex-sym
-           (cljs-test.core/log :error (.-stack ~ex-sym))
+       (catch js/Error ~ex-sym
+         (cljs-test.core/log :error (.-stack ~ex-sym))
          [:error ~ex-sym]))))
 
 (defmacro is
@@ -52,4 +52,3 @@
                    ~msg)]
         (cljs-test.core/update-test-stats! as#)
         (cljs-test.core/log-state as# msg#))))
-
