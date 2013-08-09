@@ -30,11 +30,19 @@
 
 (defmacro is
   ([expr]
-     `(is ~expr ~(str `~expr)))
+     `(is ~expr ~(str expr)))
   ([expr msg]
      `(let [as# (cljs-test.core/assertion-state (safe-eval ~expr))]
         (cljs-test.core/update-test-stats! as#)
         (cljs-test.core/log-state as# ~msg))))
+
+(defmacro is-thrown?
+  ([expr]
+     `(is-thrown? ~expr ~(str expr)))
+  ([expr msg]
+     `(is
+       (try (do ~expr false) (catch js/Error _# true))
+       ~msg)))
 
 (defmacro is=
   ([a b]
