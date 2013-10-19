@@ -5,7 +5,7 @@
   TODO: Handle detecting tests have finished in phantom case and exit with return value
   TODO: Provide HTML scaffold to pretty display test results in browser"
   (:require [clojure.java.io :as io]
-            [clojure.template :as temp]))
+            [clojure.template :as template]))
 
 (defmacro read-json
   "read json from classpath, useful for test resources"
@@ -71,5 +71,5 @@
        (and (pos? (count argv))
             (pos? (count args))
             (zero? (mod (count args) (count argv)))))
-    `(temp/do-template ~argv (is ~expr) ~@args)
+    `(template/do-template ~argv (is ~expr) ~@args)
     (throw (IllegalArgumentException. "The number of args doesn't match are's argv."))))
