@@ -1,6 +1,6 @@
 (ns cljs-test.core-test
   (:use-macros
-   [cljs-test.macros :only [deftest is= is is-thrown?]])
+   [cljs-test.macros :only [deftest is= is is-thrown? are]])
   (:require
    [cljs-test.core :as test]))
 
@@ -16,6 +16,10 @@
   (is= {:pass 5 :fail 2 :total 8 :error 1} (test/test-stats))
   (is-thrown? (throw (js/Error. "pwned")))
   (is= {:pass 7 :fail 2 :total 10 :error 1} (test/test-stats))
-  (if (= {:pass 7 :fail 2 :total 11 :error 1} (test/test-stats))
+  (are [x y] (zero? (mod x y))
+       4 2
+       9 3)
+  (is= {:pass 10 :fail 2 :total 13 :error 1} (test/test-stats))
+  (if (= {:pass 11 :fail 2 :total 14 :error 1} (test/test-stats))
     (swap! test/tests assoc-in [@test/+current-test+ :stats]
-           {:pass 7 :fail 0 :total 7 :error 0})))
+           {:pass 11 :fail 0 :total 11 :error 0})))

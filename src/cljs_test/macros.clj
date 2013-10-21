@@ -4,7 +4,8 @@
   TODO: Handle async tests (defasynctest) which take completion callback
   TODO: Handle detecting tests have finished in phantom case and exit with return value
   TODO: Provide HTML scaffold to pretty display test results in browser"
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]
+            [clojure.template :as template]))
 
 (defmacro read-json
   "read json from classpath, useful for test resources"
@@ -60,3 +61,15 @@
                    ~msg)]
         (cljs-test.core/update-test-stats! as#)
         (cljs-test.core/log-state as# msg#))))
+
+(defmacro are
+  [argv expr & args]
+  (if (or
+       ;; (are [] true) is meaningless but ok
+       (and (empty? argv) (empty? args))
+       ;; Catch wrong number of args
+       (and (pos? (count argv))
+            (pos? (count args))
+            (zero? (mod (count args) (count argv)))))
+    `(template/do-template ~argv (is ~expr) ~@args)
+    (throw (IllegalArgumentException. "The number of args doesn't match are's argv."))))
