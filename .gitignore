@@ -2,3 +2,4 @@
 *~
 target/**
 pom.*
+.lein-repl-history
