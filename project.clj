@@ -1,4 +1,5 @@
 (defproject prismatic/cljs-test "0.0.7-SNAPSHOT"
+  :clojurescript? true
   :description "Very simple cljs testing"
   :url "https://github.com/prismatic/cljs-test"
   :license {:name "Eclipse Public License"
@@ -17,4 +18,5 @@
                       :optimizations :whitespace
                       :pretty-print true}}}
    :test-commands {"unit" ["phantomjs" "target/unit-test.js"]}}
-  :plugins [[lein-cljsbuild "0.3.2"]])
+  :dependencies [[org.clojure/clojurescript "0.0-2120"]]
+  :plugins [[lein-cljsbuild "1.0.0"]])
