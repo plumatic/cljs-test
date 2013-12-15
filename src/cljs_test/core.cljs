@@ -36,6 +36,13 @@
    :fail {:color "#fff" :font-weight "bold"}
    :error {:color "#fff"}})
 
+(def +ansi-style+
+  {:pass "\u001b[32m\u001b[1m"   ; bright green
+   :notice "\u001b[36m\u001b[1m" ; bright cyan
+   :fail "\u001b[31m\u001b[1m"   ; bright red
+   :error "\u001b[31m\u001b[1m"  ; bright red
+   :default "\u001b[39m\u001b[0m"})
+
 (defn test-state
   [{:keys [pass, fail, error]}]
   (if (and (zero? fail) (zero? error))
@@ -77,7 +84,29 @@
       (.appendChild el test-el))
     (.appendChild js/document.body el)))
 
+(defn ansi-header [type msg]
+  (when type
+    (apply str
+      (+ansi-style+ type)
+      (condp = type
+        :fail   "  FAIL  "
+        :error  " ERROR  "
+        :pass   "  PASS  "
+        :notice msg)
+      (+ansi-style+ :default)
+      (if (not= type :notice) msg))))
+
+(defn console-logger [type msg]
+  (when js/window.phantom
+    (.log
+      js/console
+      (.replace
+        (ansi-header type msg)
+        (js/RegExp. "\n" "g")
+        "\n        "))))
+
 (defn log [type msg]
+  (console-logger type msg)
   (let [el (.createElement js/document "div")]
     (style el (merge {:white-space "pre"}
                      (+state-style+ type)))
@@ -85,6 +114,7 @@
     (.appendChild js/document.body el)))
 
 (defn log-state [state msg]
+  (console-logger state msg)
   (let [el (.createElement js/document "div")
         state-span (.createElement js/document "span")]
     (style el
