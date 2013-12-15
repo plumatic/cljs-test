@@ -86,7 +86,7 @@
 
 (defn ansi-header [type msg]
   (when type
-    (apply str
+    (str
       (+ansi-style+ type)
       (condp = type
         :fail   "  FAIL  "
