@@ -34,13 +34,15 @@
   {:pass {:color "#67f86f"}
    :notice {:color "#77d3ee"  :font-size "1.2em" :margin-top "1em" :font-weight "bold"}
    :fail {:color "#fff" :font-weight "bold"}
-   :error {:color "#fff"}})
+   :error {:color "#fff"}
+   :debug {:color "#c5c5c5" :font-style "italic"}})
 
 (def +ansi-style+
   {:pass "\u001b[32m\u001b[1m"   ; bright green
    :notice "\u001b[36m\u001b[1m" ; bright cyan
    :fail "\u001b[31m\u001b[1m"   ; bright red
    :error "\u001b[31m\u001b[1m"  ; bright red
+   :debug "\u001b[37m\u001b[3m"  ; italic grey
    :default "\u001b[39m\u001b[0m"})
 
 (defn test-state
@@ -92,9 +94,10 @@
         :fail   "  FAIL  "
         :error  " ERROR  "
         :pass   "  PASS  "
+        :debug  msg
         :notice msg)
       (+ansi-style+ :default)
-      (if (not= type :notice) msg))))
+      (when-not (#{:notice :debug} type) msg))))
 
 (defn console-logger [type msg]
   (when js/window.phantom
@@ -105,13 +108,15 @@
         (js/RegExp. "\n" "g")
         "\n        "))))
 
-(defn log [type msg]
-  (console-logger type msg)
-  (let [el (.createElement js/document "div")]
-    (style el (merge {:white-space "pre"}
-                     (+state-style+ type)))
-    (set! (.-innerHTML el) msg)
-    (.appendChild js/document.body el)))
+(defn log [type & more]
+  (let [msg (.trimRight (apply str more))]
+    (when (pos? (count msg))
+      (console-logger type msg)
+      (let [el (.createElement js/document "div")]
+        (style el (merge {:white-space "pre"}
+                         (+state-style+ type)))
+        (set! (.-innerHTML el) msg)
+        (.appendChild js/document.body el)))))
 
 (defn log-state [state msg]
   (console-logger state msg)
@@ -132,6 +137,11 @@
     (.appendChild el state-span)
     (.appendChild el (.createTextNode js/document msg))
     (.appendChild js/document.body el)))
+
+(set!
+  *print-fn*
+  (fn [s]
+    (log :debug s)))
 
 (defn run-tests! []
   (style js/document.body
