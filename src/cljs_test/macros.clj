@@ -56,7 +56,7 @@
                   [:no-error :no-error] (cljs-test.core/assertion-state
                                          (safe-eval (= (second lhs#) (second rhs#))))
                   :error)
-            msg# (if (identical? as# :fail)
+            msg# (if (= as# :fail)
                    (str ~msg " (not= " (second lhs#) " " (second rhs#) ")")
                    ~msg)]
         (cljs-test.core/update-test-stats! as#)
