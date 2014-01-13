@@ -1,4 +1,4 @@
-# cljs-test [![Build Status](https://secure.travis-ci.org/rm-hull/cljs-test.png)](http://travis-ci.org/rm-hull/cljs-test)
+# cljs-test [![Build Status](https://secure.travis-ci.org/prismatic/cljs-test.png)](http://travis-ci.org/prismatic/cljs-test)
 
 
 Simple testing library for ClojureScript, mirroring `clojure.test` as much as possible. Each `deftest` runs after declaration and prints test statistics to console. Intended usage is with [phantomJS](http://phantomjs.org/) and `lein cljsbuild test` to get a readable test summary. In the future, we'll add some HTML scaffolding to support visual test results in a browser.
@@ -11,7 +11,7 @@ Simple testing library for ClojureScript, mirroring `clojure.test` as much as po
 (ns mytest-ns
   (:require cljs-test.core)
   (:use-macros [cljs-test.macros :only [deftest is= is]]))
-  
+
 (deftest simple-case
   (is= 1 (+ 0 1))
   (is true)
