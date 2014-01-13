@@ -1,4 +1,5 @@
-# cljs-test: Sane ClojureScript Testing
+# cljs-test [![Build Status](https://secure.travis-ci.org/rm-hull/cljs-test.png)](http://travis-ci.org/rm-hull/cljs-test)
+
 
 Simple testing library for ClojureScript, mirroring `clojure.test` as much as possible. Each `deftest` runs after declaration and prints test statistics to console. Intended usage is with [phantomJS](http://phantomjs.org/) and `lein cljsbuild test` to get a readable test summary. In the future, we'll add some HTML scaffolding to support visual test results in a browser.
 
@@ -17,6 +18,40 @@ Simple testing library for ClojureScript, mirroring `clojure.test` as much as po
   (is nil))
 ```
 
+Add a section in your ```project.clj``` as follows:
+
+```clojure
+  {:builds
+   {:test {:source-paths ["src" "test"]
+           :compiler {:output-to "target/unit-test.js"
+                      :optimizations :whitespace
+                      :pretty-print true}}}
+   :test-commands {"unit" ["phantomjs" "target/unit-test.js"]}}
+```
+### Testing in the browser
+
+To generate the test runner,
+
+    $ lein clean
+    $ lein cljsbuild once test
+
+Add an HTML file (recommended ```resources/test.html```) with the following content:
+
+```html
+<html>
+  <body>
+    <script src="../target/unit-test.js"></script>
+  </body>
+</html>
+```
+Open the HTML file in a browser to execute the tests.
+
+### Testing using PhantomJS
+
+Run
+
+    $ lein clean
+    $ lein cljsbuild test
 
 ## License
 
