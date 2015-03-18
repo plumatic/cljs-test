@@ -1,3 +1,5 @@
+**UPDATE 3/18/2015: this library is no longer under active development -- we'd recommend checking out [clojurescript.test](https://github.com/cemerick/clojurescript.test) or ClojureScript's new built-in [cljs.test](https://groups.google.com/forum/#!topic/clojure/gnCl0CySSk8)**
+
 # cljs-test [![Build Status](https://secure.travis-ci.org/Prismatic/cljs-test.png)](http://travis-ci.org/Prismatic/cljs-test)
 
 
