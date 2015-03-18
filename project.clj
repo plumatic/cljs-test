@@ -5,7 +5,6 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:url "git@github.com:prismatic/cljs-test.git"}
-  :clojurescript? true
   :pom-addition [:developers [:developer
                               [:name "Prismatic"]
                               [:url "http://getprismatic.com"]
