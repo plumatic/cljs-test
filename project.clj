@@ -1,15 +1,9 @@
 (defproject prismatic/cljs-test "0.0.7-SNAPSHOT"
   :clojurescript? true
   :description "Very simple cljs testing"
-  :url "https://github.com/prismatic/cljs-test"
+  :url "https://github.com/plumatic/cljs-test"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :scm {:url "git@github.com:prismatic/cljs-test.git"}
-  :pom-addition [:developers [:developer
-                              [:name "Prismatic"]
-                              [:url "http://getprismatic.com"]
-                              [:email "admin+oss@getprismatic.com"]
-                              [:timezone "-8"]]]
   :cljsbuild
   {:builds
    {:test {:source-paths ["src" "test"]
